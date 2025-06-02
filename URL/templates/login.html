@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/login.css">
+    <script src="/static/js/login.js" defer></script>
+    <title>로그인</title>
+</head>
+<body>
+    <div class="login-wrapper">
+    <div class="login-title">
+        <h2>로그인</h2>
+    </div>
+    <form id="loginForm" class="login-form" method="post" action="/login">
+    <label for="insert_id">아이디</label>
+    <input type="text" id="insert_id" name="id" placeholder="아이디" required>
+
+    <label for="insert_pw">비밀번호</label>
+    <input type="password" id="insert_pw" name="pw" placeholder="비밀번호" required>
+
+    <button type="submit" class="btn full">로그인</button>
+    <button type="button" class="btn full" onclick="location.href='/regist'">회원가입</button>
+  </form>
+</div>
+
+</body>
+</html>

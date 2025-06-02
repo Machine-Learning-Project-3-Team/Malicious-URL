@@ -1,0 +1,145 @@
+/* 전체 페이지 배경 및 정렬 */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f0f2f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* 회원가입 박스 */
+.register-wrapper {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 400px;
+}
+
+/* 타이틀 */
+.register-title h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 폼 레이아웃 */
+#registerForm {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 라벨 */
+#registerForm label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #444;
+}
+
+/* 입력 필드 */
+#registerForm input[type="text"],
+#registerForm input[type="password"] {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  font-size: 15px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+#registerForm input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+/* 버튼 */
+.btn.full {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.btn.full:hover {
+  background-color: #0056b3;
+}
+
+/* 아이디 중복 메시지 */
+#idCheckMessage {
+  font-size: 14px;
+  margin-top: -12px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.id-check-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.register-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.register-buttons .btn.cancel {
+  background-color: #6c757d;
+}
+
+.register-buttons .btn.cancel:hover {
+  background-color: #495057;
+}
+
+a.btn {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+a.btn.full {
+  width: 48%;
+  background-color: #6c757d;
+  color: white;
+}
+
+a.btn.full:hover {
+  background-color: #495057;
+}
+
+.register-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button.btn.full {
+  width: 48%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+button.btn.full:hover {
+  background-color: #0056b3;
+}

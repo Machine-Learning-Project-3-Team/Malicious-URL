@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>객인 바이너가운 API URL 검사</title>
+  <link rel="stylesheet" href="/static/css/index.css">
+</head>
+<body>
+  <div class="container">
+    <h1>악성 URL 검사</h1>
+    <div class="welcome">{{ username }}님 환영합니다! <a href="/logout" class="logout-btn">로그아웃</a></div>
+
+    <!-- ✅ API 키 발급 버튼 -->
+    <div class="api-button" onclick="openModal()">
+      API 키 발급
+    </div>
+
+    <!-- ✅ 검사 기능 -->
+    <div class="section">
+      <div class="row">
+        <div class="label">API + URL</div>
+        <input type="text" placeholder="API Key + URL 입력">
+        <button class="search-button">검사</button>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="label">URL</div>
+        <input type="text" placeholder="URL 입력">
+        <button class="search-button">검사</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ API Key 발급 모달 -->
+  <div id="apiModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+
+      <div class="modal-row">
+        <div class="modal-label">API Key</div>
+        <input type="text" class="modal-input" readonly>
+        <button class="copy-btn" onclick="copyAPIKey()">복사</button>
+        <button class="reissue-btn" onclick="reissueAPIKey()">🔁 재발급</button>
+      </div>
+
+      <div class="modal-row">
+        <div class="modal-label">유효기간</div>
+        <div class="expiration">0000.00.00 00:00</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ JS 코드 -->
+  <script>
+    // API 키 발급 및 모달 표시
+    async function openModal() {
+      try {
+        const response = await fetch('/issue_api_key');
+        const result = await response.json();
+
+        if (response.ok && result.api_key) {
+          document.querySelector('.modal-input').value = result.api_key;
+          document.querySelector('.expiration').innerText = result.api_expiration;
+          document.getElementById('apiModal').style.display = 'block';
+        } else {
+          alert(result.message || 'API Key 발급에 실패했습니다.');
+        }
+      } catch (err) {
+        console.error('API 요청 실패:', err);
+        alert('서버와의 통신 중 오류가 발생했습니다.');
+      }
+    }
+
+    // 모달 닫기
+    function closeModal() {
+      document.getElementById('apiModal').style.display = 'none';
+    }
+
+    // API 키 복사
+    function copyAPIKey() {
+      const input = document.querySelector(".modal-input");
+      if (!input.value) {
+        alert("API Key가 없습니다.");
+        return;
+      }
+
+      navigator.clipboard.writeText(input.value)
+        .then(() => alert("API Key가 복사되었습니다."))
+        .catch(err => {
+          console.error("복사 실패:", err);
+          alert("복사에 실패했습니다.");
+        });
+    }
+
+    // API 키 재발급
+    async function reissueAPIKey() {
+      try {
+        const response = await fetch('/reissue_api_key', {
+          method: 'POST'
+        });
+        const result = await response.json();
+
+        if (response.ok && result.api_key) {
+          document.querySelector('.modal-input').value = result.api_key;
+          document.querySelector('.expiration').innerText = result.api_expiration;
+          alert('새 API Key가 발급되었습니다.');
+        } else {
+          alert(result.message || 'API Key 재발급에 실패했습니다.');
+        }
+      } catch (err) {
+        console.error('재발급 요청 실패:', err);
+        alert('서버와의 통신 중 오류가 발생했습니다.');
+      }
+    }
+  </script>
+</body>
+</html>
